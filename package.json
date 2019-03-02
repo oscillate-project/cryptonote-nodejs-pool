@@ -16,17 +16,16 @@
         "cryptoforknote-util": "git://github.com/MoneroOcean/node-cryptoforknote-util.git",
         "cryptonight-hashing": "git://github.com/MoneroOcean/node-cryptonight-hashing.git",
         "multi-hashing": "git://github.com/muscleman/node-multi-hashing.git#ipbc",
-        "dateformat": "^3.0.3",
-        "mailgun.js": "^2.0.1",
-        "node-telegram-bot-api": "^0.30.0",
-        "nodemailer": "^2.7.2",
-        "nodemailer-sendmail-transport": "^1.0.2",
-        "promise-queue": "^2.2.5",
-        "redis": "^2.8.0",
-        "request": "^2.88.0",
-        "request-promise": "^4.2.2",
+        "dateformat": "*",
+        "mailgun.js": "*",
+        "node-telegram-bot-api": "*",
+        "nodemailer": "2.7.2",
+        "nodemailer-sendmail-transport": "*",
+        "redis": "*",
         "socket.io": "^2.1.1",
-        "time-ago": "^0.2.1"
+        "time-ago": "*",
+        "request": "^2.88.0",
+        "request-promise-native": "^1.0.5"
     },
     "engines": {
         "node": ">=8.11.3"

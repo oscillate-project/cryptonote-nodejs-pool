@@ -1,15 +1,13 @@
 {
     "poolHost": "your.pool.host",
-
     "coin": "turtlecoin",
     "symbol": "TRTL",
     "coinUnits": 100,
     "coinDecimalPlaces": 4,
     "coinDifficultyTarget": 30,
-
     "daemonType": "bytecoin",
-    "cnAlgorithm": "cryptonight_light",
-    "cnVariant": 1,
+    "cnAlgorithm": "cryptonight_pico",
+    "cnVariant": 2,
     "cnBlobType": 2,
 
     "logging": {
@@ -26,7 +24,7 @@
 
     "poolServer": {
         "enabled": true,
-        "clusterForks": "auto",
+        "clusterForks": 6,
         "poolAddress": "** Your pool wallet address **",
         "intAddressPrefix": null,
         "blockRefreshInterval": 1000,
@@ -71,7 +69,7 @@
         "varDiff": {
             "minDiff": 100,
             "maxDiff": 100000000,
-            "targetTime": 60,
+            "targetTime": 30,
             "retargetTime": 30,
             "variancePercent": 30,
             "maxJump": 100
@@ -79,6 +77,7 @@
         "paymentId": {
             "addressSeparator": "+"
         },
+	"separators": [{"value":"+","desc":"plus"}, {"value":".","desc":"dot"}],
         "fixedDiff": {
             "enabled": true,
             "addressSeparator": "."
@@ -121,9 +120,9 @@
     "blockUnlocker": {
         "enabled": true,
         "interval": 30,
-        "depth": 40,
+        "depth": 120,
         "poolFee": 0.8,
-        "devDonation": 0.2,
+        "devDonation": 0.0,
         "networkFee": 0.0,
         "fixBlockHeightRPC": false
     },
@@ -132,13 +131,13 @@
         "enabled": true,
         "hashrateWindow": 600,
         "updateInterval": 5,
-        "bindIp": "0.0.0.0",
-        "port": 8117,
+        "bindIp": "192.168.0.116",
+        "port": 3107,
         "blocks": 30,
         "payments": 30,
         "password": "your_password",
-        "ssl": false,
-        "sslPort": 8119,
+        "ssl": true,
+        "sslPort": 3109,
         "sslCert": "./cert.pem",
         "sslKey": "./privkey.pem",
         "sslCA": "./chain.pem",
@@ -147,13 +146,12 @@
 
     "daemon": {
         "host": "127.0.0.1",
-        "port": 11989
+        "port": 11898
     },
 
     "wallet": {
         "host": "127.0.0.1",
-        "port": 11990,
-        "password": "rpc_password"
+        "port": 8070
     },
 
     "redis": {
@@ -249,7 +247,7 @@
     },
 
     "prices": {
-        "source": "cryptonator",
+        "source": "tradeogre",
         "currency": "USD"
     },
 
@@ -308,6 +306,10 @@
             "payments": {
                 "enabled": true
             }
+        },
+        "blocks": {
+            "enabled": true,
+            "days": 30
         }
     }
 }

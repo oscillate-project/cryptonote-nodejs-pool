@@ -7,8 +7,8 @@
     "coinDecimalPlaces": 9,
     "coinDifficultyTarget": 120,
 
-    "cnAlgorithm": "cryptonight_light",
-    "cnVariant": 1,
+    "cnAlgorithm": "cryptonight_pico",
+    "cnVariant": 2,
     "cnBlobType": 0,
 
     "logging": {

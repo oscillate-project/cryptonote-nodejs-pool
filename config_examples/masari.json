@@ -9,8 +9,8 @@
 
     "daemonType": "default",
     "cnAlgorithm": "cryptonight",
-    "cnVariant": 4,
-    "cnBlobType": 3,
+    "cnVariant": 6,
+    "cnBlobType": 9,
 
     "logging": {
         "files": {

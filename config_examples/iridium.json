@@ -5,7 +5,7 @@
     "symbol": "IRD",
     "coinUnits": 100000000,
     "coinDecimalPlaces": 4,
-    "coinDifficultyTarget": 160,
+    "coinDifficultyTarget": 175,
 
     "daemonType": "bytecoin",
     "cnAlgorithm": "cryptonight_pico",

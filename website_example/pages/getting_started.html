@@ -364,7 +364,10 @@ currentPage = {
         algorithm = '';
         xmrstakAlgo = '';
 
-        if (cnAlgorithm == "cryptonight_light") {
+        if (cnAlgorithm == "randomx") {
+            algorithm = "RandomX";
+        }
+        else if (cnAlgorithm == "cryptonight_light") {
             if (cnVariant === 1) {
                 algorithm = 'Cryptonight Light (Aeon v7)';
                 xmrstakAlgo = 'cryptonight_lite_v7';

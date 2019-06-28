@@ -8,7 +8,7 @@
     "coinDifficultyTarget": 120,
 
     "daemonType": "default",
-    "cnAlgorithm": "cryptonight_heavy",
+    "cnAlgorithm": "randomx",
     "cnVariant": 0,
     "cnBlobType": 5,
 

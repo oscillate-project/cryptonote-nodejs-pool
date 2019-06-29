@@ -367,6 +367,9 @@ currentPage = {
         if (cnAlgorithm == "randomx") {
             algorithm = "RandomX";
         }
+        else if (cnAlgorithm == "random_wow") {
+            algorithm = "randomx/wow"
+        }
         else if (cnAlgorithm == "cryptonight_light") {
             if (cnVariant === 1) {
                 algorithm = 'Cryptonight Light (Aeon v7)';
@@ -410,9 +413,6 @@ currentPage = {
 	    } else if (cnVariant === 8) {
 		algorithm = 'Cryptonight (Monero v8)';
 		xmrstakAlgo = 'cryptonight_v8';
-            } else if (cnVariant === 12) {
-                algorithm = 'Cryptonight (Wow)';
-                xmrstakAlgo = 'cn/wow';
             } else if (cnVariant === 14) {
                 algorithm = 'Cryptonight v8 Waltz';
                 xmrstakAlgo = 'cryptonight_v8_waltz';

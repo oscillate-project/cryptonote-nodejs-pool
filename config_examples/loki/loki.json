@@ -11,7 +11,9 @@
     "cnAlgorithm": "randomx",
     "cnVariant": 0,
     "cnBlobType": 5,
-
+    "includeHeight": false,
+    "isRandomX": true,
+    
     "logging": {
         "files": {
             "level": "info",

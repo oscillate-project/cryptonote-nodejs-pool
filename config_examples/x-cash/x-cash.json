@@ -257,7 +257,7 @@
     },
 
     "prices": {
-        "source": "tradeogre",
+        "source": "tradesatoshi",
         "currency": "USD"
     },
 

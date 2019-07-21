@@ -1,18 +1,15 @@
 {
     "poolHost": "your.pool.host",
 
-    "coin": "wownero",
-    "symbol": "WOW",
-    "coinUnits": 100000000000,
-    "coinDecimalPlaces": 4,
-    "coinDifficultyTarget": 300,
+    "coin": "aeon",
+    "symbol": "AEON",
+    "coinUnits": 1000000000000,
+    "coinDecimalPlaces": 12,
+    "coinDifficultyTarget": 240,
 
-    "daemonType": "default",
-    "cnAlgorithm": "random_wow",
-    "cnVariant": 17,
+    "cnAlgorithm": "K12",
+    "cnVariant": 1,
     "cnBlobType": 0,
-    "includeHeight": false,
-    "isRandomX": true,
 
     "logging": {
         "files": {
@@ -25,12 +22,11 @@
             "colors": true
         }
     },
-
+    "hashingUtil":true,
     "poolServer": {
         "enabled": true,
         "clusterForks": "auto",
         "poolAddress": "Your pool wallet address",
-        "intAddressPrefix": 19,
         "blockRefreshInterval": 1000,
         "minerTimeout": 900,
         "sslCert": "./cert.pem",
@@ -39,42 +35,41 @@
         "ports": [
             {
                 "port": 4333,
-                "difficulty": 5000,
+                "difficulty": 100000000,
                 "desc": "Low end hardware"
             },
             {
                 "port": 4444,
-                "difficulty": 15000,
+                "difficulty": 500000000,
                 "desc": "Mid range hardware"
             },
             {
                 "port": 4555,
-                "difficulty": 25000,
+                "difficulty": 1000000000,
                 "desc": "High end hardware"
             },
             {
                 "port": 4777,
-                "difficulty": 500000,
-		"hidden": true,
-                "desc": "Cloud-mining / NiceHash"
+                "difficulty": 10000000000,
+                "desc": "Test"
             },
             {
                 "port": 4888,
-                "difficulty": 25000,
-                "desc": "Hidden port",
-                "hidden": true
+                "difficulty": 100000000000,
+                "desc": "Test"
             }
-        ],
+	],
         "varDiff": {
             "minDiff": 100,
-            "maxDiff": 1000000,
+            "maxDiff": 100000000,
             "targetTime": 60,
             "retargetTime": 30,
             "variancePercent": 30,
             "maxJump": 100
         },
         "paymentId": {
-            "addressSeparator": "+"
+            "addressSeparator": "+",
+            "validation": true
         },
         "fixedDiff": {
             "enabled": true,
@@ -103,24 +98,24 @@
 
     "payments": {
         "enabled": true,
-        "interval": 1800,
-        "maxAddresses": 50,
-        "mixin": 16,
+        "interval": 120,
+        "maxAddresses": 20,
+        "mixin": 4,
         "priority": 0,
-        "transferFee": 14000000000,
+        "transferFee": 10000000000,
         "dynamicTransferFee": true,
         "minerPayFee" : true,
-        "minPayment": 1000000000000,
-        "maxPayment": null,
+        "minPayment": 250000000000,
+	    "maxPayment": null,
         "maxTransactionAmount": 0,
-        "denomination": 100000000000
+        "denomination": 10000000000
     },
 
     "blockUnlocker": {
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 2.0,
+        "poolFee": 0.0,
         "devDonation": 0.2,
         "networkFee": 0.0
     },
@@ -128,9 +123,9 @@
     "api": {
         "enabled": true,
         "hashrateWindow": 600,
-        "updateInterval": 5,
+        "updateInterval": 3,
         "bindIp": "0.0.0.0",
-        "port": 34558,
+        "port": 8117,
         "blocks": 30,
         "payments": 30,
         "password": "your_password",
@@ -144,12 +139,12 @@
 
     "daemon": {
         "host": "127.0.0.1",
-        "port": 34568
+        "port": 21181
     },
 
     "wallet": {
         "host": "127.0.0.1",
-        "port": 39578
+        "port": 21190
     },
 
     "redis": {
@@ -229,12 +224,10 @@
         },
         "botCommands": {
             "stats": "/stats",
-            "report": "/report",
-            "notify": "/notify",
-            "blocks": "/blocks"
+            "enable": "/enable",
+            "disable": "/disable"
         }
-    },
-    
+    }, 
     "monitoring": {
         "daemon": {
             "checkInterval": 60,
@@ -250,32 +243,31 @@
         "source": "tradeogre",
         "currency": "USD"
     },
-    
     "charts": {
         "pool": {
             "hashrate": {
                 "enabled": true,
-                "updateInterval": 10,
-                "stepInterval": 600,
-                "maximumPeriod": 3600
+                "updateInterval": 60,
+                "stepInterval": 1800,
+                "maximumPeriod": 86400
             },
             "miners": {
                 "enabled": true,
-                "updateInterval": 10,
-                "stepInterval": 600,
-                "maximumPeriod": 3600
+                "updateInterval": 60,
+                "stepInterval": 1800,
+                "maximumPeriod": 86400
             },
             "workers": {
                 "enabled": true,
-                "updateInterval": 10,
-                "stepInterval": 6000,
-                "maximumPeriod": 3600
+                "updateInterval": 60,
+                "stepInterval": 1800,
+                "maximumPeriod": 86400
             },
             "difficulty": {
                 "enabled": true,
-                "updateInterval": 10,
-                "stepInterval": 600,
-                "maximumPeriod": 3600
+                "updateInterval": 1800,
+                "stepInterval": 10800,
+                "maximumPeriod": 604800
             },
             "price": {
                 "enabled": true,
@@ -306,10 +298,6 @@
             "payments": {
                 "enabled": true
             }
-        },
-        "blocks": {
-            "enabled": true,
-            "days": 30
         }
     }
 }

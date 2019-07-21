@@ -16,14 +16,13 @@ let apiInterfaces = require('./apiInterfaces.js')(config.daemon, config.wallet, 
 let notifications = require('./notifications.js');
 let utils = require('./utils.js');
 
-config.hashingUtil = config.hashingUtil || false
 let cnHashing = require('cryptonight-hashing');
 if (config.hashingUtil)
     cnHashing = require('multi-hashing');
 
 // Set nonce pattern - must exactly be 8 hex chars
-let noncePattern = new RegExp("^[0-9A-Fa-f]{8}$");
-
+//let noncePattern = new RegExp("^[0-9A-Fa-f]{16}$");
+let noncePattern = new RegExp("^[0-9a-f]{16}$"); 
 // Set redis database cleanup interval
 let cleanupInterval = config.redis.cleanupInterval && config.redis.cleanupInterval > 0 ? config.redis.cleanupInterval : 15;
 
@@ -42,11 +41,11 @@ let cnVariant = config.cnVariant || 0;
 let cnBlobType = config.cnBlobType || 0;
 
 let cryptoNight;
-if (!cnHashing || !cnHashing[cnAlgorithm]) {
-    log('error', logSystem, 'Invalid cryptonight algorithm: %s', [cnAlgorithm]);
-} else {
-    cryptoNight = cnHashing[cnAlgorithm];
-}
+//if (!cnHashing || !cnHashing[cnAlgorithm]) {
+//    log('error', logSystem, 'Invalid cryptonight algorithm: %s', [cnAlgorithm]);
+//} else {
+    cryptoNight = cnHashing.k12; //[cnAlgorithm];
+//}
 
 // Set instance id
 let instanceId = utils.instanceId();
@@ -72,10 +71,6 @@ if (config.poolServer.paymentId.validation == null) config.poolServer.paymentId.
 
 config.isRandomX = config.isRandomX || false
 
-let previousOffset = 7
-config.daemonType = config.daemonType || 'default'
-if (config.daemonType === 'bytecoin')
-    previousOffset = 3
 
 
 // Block templates
@@ -160,7 +155,7 @@ function BlockTemplate(template, isRandomX){
     this.buffer = Buffer.from(this.blob, 'hex');
     instanceId.copy(this.buffer, this.reserveOffset + 4, 0, 3);
     this.previous_hash = Buffer.alloc(32);
-    this.buffer.copy(this.previous_hash, 0, previousOffset, 39);
+    this.buffer.copy(this.previous_hash, 0, 7, 39);
     this.extraNonce = 0;
 
     // The clientNonceLocation is the location at which the client pools should set the nonces for each of their clients.
@@ -187,7 +182,7 @@ BlockTemplate.prototype = {
  **/
 function getBlockTemplate(callback){
     apiInterfaces.rpcDaemon('getblocktemplate',
-                            {reserve_size: 17, wallet_address: config.poolServer.poolAddress},
+                            {reserve_size: 17 /*8*/, wallet_address: config.poolServer.poolAddress},
                             callback)
 }
 
@@ -261,7 +256,7 @@ function jobRefresh(loop){
 
                 let buffer = Buffer.from(result.blocktemplate_blob, 'hex');
                 let new_hash = Buffer.alloc(32);
-                buffer.copy(new_hash, 0, previousOffset, 39);
+                buffer.copy(new_hash, 0, 7, 39);
                 try {
                     if (!currentBlockTemplate || new_hash.toString('hex') !== currentBlockTemplate.previous_hash.toString('hex')) {
                         log('info', logSystem, 'New %s block to mine at height %d w/ difficulty of %d', [config.coin, result.height, result.difficulty]);
@@ -390,10 +385,10 @@ Miner.prototype = {
         let diffBuff = diff1.div(this.difficulty).toBuffer();
         diffBuff.copy(padded, 32 - diffBuff.length);
 
-        let buff = padded.slice(0, 4);
+        let buff = padded.slice(0, 8);
         let buffArray = buff.toByteArray().reverse();
         let buffReversed = Buffer.from(buffArray);
-        this.target = buffReversed.readUInt32BE(0);
+        //this.target = buffReversed.readUInt32BE(0);
         let hex = buffReversed.toString('hex');
         return hex;
     },
@@ -650,6 +645,8 @@ function handleMinerMethod(method, params, ip, portData, sendReply, pushMessage)
                 return;
             }
 
+            params.nonce = params.nonce.substr(0,16).toLowerCase();
+
             if (!noncePattern.test(params.nonce)) {
                 let minerText = miner ? (' ' + miner.login + '@' + miner.ip) : '';
                 log('warn', logSystem, 'Malformed nonce: ' + JSON.stringify(params) + ' from ' + minerText);
@@ -660,7 +657,7 @@ function handleMinerMethod(method, params, ip, portData, sendReply, pushMessage)
             }
 
             // Force lowercase for further comparison
-            params.nonce = params.nonce.toLowerCase();
+//            params.nonce = params.nonce.toLowerCase();
 
         if (!miner.proxy) {
             if (job.submissions.indexOf(params.nonce) !== -1){
@@ -954,7 +951,7 @@ function processShare(miner, job, blockTemplate, params){
             hash = cryptoNight(convertedBlob);
         }
         else if (blockTemplate.isRandomX) {
-            hash = cryptoNight(convertedBlob, Buffer.from(blockTemplate.seed_hash, 'hex'), cnVariant);
+            hash = cryptoNight(convertedBlob, Buffer.from(blockTemplate.seed_hash, 'hex'));
         }
         else {
             if (typeof config.includeHeight !== "undefined" && config.includeHeight)

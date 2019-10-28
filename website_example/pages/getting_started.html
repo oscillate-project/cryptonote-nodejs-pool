@@ -17,7 +17,7 @@
                 <div id="fixedDiff"><i class="fa fa-wrench"></i> <span data-tkey="fixedDiff">Difficulty locking</span>: <span><u data-tkey="address">address</u><span id="fixedDiffSeparator">+</span><u data-tkey="addrDiff">diff</u></span></div>
             </div>
         </div>
-	    
+
         <h4 class="push-up-15"><span data-tkey="password">Password</span></h4>
         <div class="card padding-l-10 padding-r-10">
             <div class="stats">
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- Mining Applications and Configuration Generator -->
@@ -81,7 +81,7 @@
         <div class="col-sm-6 col-xs-12">
             <div class="input-group push-down-5">
                 <span class="input-group-addon"><i class="fa fa-server"></i></span>
-                <input class="form-control" id="gWorkerName" data-tplaceholder="workerNameField" type="text" placeholder="Worker_Name" /> 
+                <input class="form-control" id="gWorkerName" data-tplaceholder="workerNameField" type="text" placeholder="Worker_Name" />
             </div>
         </div>
         <div class="col-sm-6 col-xs-12">
@@ -110,7 +110,7 @@
             </tr>
             </thead>
             <tbody id="miningApps_rows">
-	    
+
 	    <!-- XMR Stak -->
             <tr class="appInfo">
                 <td class="miningAppTitle">XMR Stak</td>
@@ -122,7 +122,7 @@
             <tr class="appConfig">
                 <td colspan="5">
                     <div class="collapse" id="xmrstak">
-		
+
 <pre><code>"pool_list": [
     {
         "pool_address": "<span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span>",
@@ -140,7 +140,7 @@
                     </div>
                 </td>
             </tr>
-	    
+
 	    <!-- XMRig -->
             <tr class="appInfo">
                 <td class="miningAppTitle">XMRig</td>
@@ -152,7 +152,7 @@
             <tr class="appConfig">
                 <td colspan="5">
                     <div class="collapse" id="xmrig">
-		
+
 <pre><code>"pools": [
     {
         "url": "<span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span>",
@@ -179,7 +179,7 @@
             <tr class="appConfig">
                 <td colspan="5">
                     <div class="collapse" id="xmrig-amd">
-		
+
 <pre><code>"pools": [
     {
         "url": "<span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span>",
@@ -206,7 +206,7 @@
             <tr class="appConfig">
                 <td colspan="5">
                     <div class="collapse" id="xmrig-nvidia">
-		
+
 <pre><code>"pools": [
     {
         "url": "<span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span>",
@@ -233,7 +233,7 @@
             <tr class="appConfig">
                 <td colspan="5">
                     <div class="collapse" id="xmrig-cc">
-		
+
 <pre><code>"pools": [
     {
         "url": "<span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span>",
@@ -247,7 +247,7 @@
                     </div>
                 </td>
             </tr>
-		    
+
 	    <!-- SRBMiner -->
             <tr class="appInfo">
                 <td class="miningAppTitle">SRBMiner Cryptonight AMD GPU Miner</td>
@@ -259,7 +259,7 @@
             <tr class="appConfig">
                 <td colspan="5">
                     <div class="collapse" id="srbminer">
-		
+
 <pre><code>
 {
 /* Type can be : normal, lite, heavy  */
@@ -302,15 +302,15 @@
 /* Id starts from 0 , not from 1 !! */
 /* To get a list of available devices with their id's, use --listdevices parameter */
 /* This is just an example, edit it and remove comment lines (the slash and star) !! */
-/*"gpu_conf" : 
-[ 
+/*"gpu_conf" :
+[
 	{ "id" : 0, "intensity" : 0, "double_threads" : true},
 	{ "id" : 1, "intensity" : 60, "double_threads" : false},
 	{ "id" : 3, "intensity" : 50, "double_threads" : true},
 	{ "id" : 4, "intensity" : 0, "double_threads" : true},
 ]*/
-}		    
-	    
+}
+
             </tbody>
         </table>
     </div>
@@ -369,6 +369,8 @@ currentPage = {
                algorithm = 'RandomWOW (WOW)';
            else if (cnVariant === 18)
                algorithm = 'RandomXL (Loki)';
+           else if (cnVariant === 2)
+               algorithm = 'RandomARQ (ARQMA)';
            else
                algorithm = 'RandomX';
         }
@@ -467,7 +469,7 @@ $('#generateConf').click(function() {
     let  address = $('#gAddress').val().replace(/\s+/g, '').trim();
     let  paymentID = $('#gPaymentID').val().replace(/\s+/g, '').trim();
     let  difficulty = parseInt($('#gDifficulty').val().replace(/\s+/g, '').trim());
-    
+
     let  login = address ? address : 'YOUR_WALLET_ADDRESS';
     if (paymentID) login = login + lastStats.config.paymentIdSeparator + paymentID;
     if (difficulty) login = login + lastStats.config.fixedDiffSeparator + difficulty;
@@ -477,6 +479,6 @@ $('#generateConf').click(function() {
     let  workerName = $('#gWorkerName').val().replace(/\s+/g, '').trim();
 
     let  password = workerName ? workerName : 'x';
-    updateTextClasses('examplePassword', password);    
+    updateTextClasses('examplePassword', password);
 });
 </script>
